@@ -3,6 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --olive: #A3BCB6;
+  --greenLeaf: #39603D;
+  --brownGrey: #3G403D;
+  --tanly: #DADED4;
+  --white: #FFFFFF;
+}
 
 html {
   height: 100%;
@@ -11,6 +18,7 @@ html {
 body {
   min-height: 100%;
   line-height: 1;
+  background-color: var(--tanly);
   font-family: 'Roboto', sans-serif;;
 }
 
@@ -38,4 +46,16 @@ code {
 ol,
 ul {
   list-style: none;
+}
+
+#jumbo {
+  background-color: var(--greenLeaf);
+}
+
+.card-header {
+  background-color: var(--olive);
+}
+
+.shadow {
+  box-shadow: 0 .25rem .75rem black!important;
 }
