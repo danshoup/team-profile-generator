@@ -1,0 +1,25 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "This tool will build an HTML page with the user input from the terminal prompts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danshoup/team-profile-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danshoup/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/danshoup/team-profile-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.1.0",
+    "jest": "^27.0.4"
+  }
+}
