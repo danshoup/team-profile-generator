@@ -119,23 +119,156 @@ const html =`<!DOCTYPE html>
   </body>
 </html>`;
 
-// Function to return HTML
-
-function generateHTML() {
-    return html;
-};
 
 // Need questions for inquirer:
 
+//Choices for adding a new team member:
+const nextMember = [
+  {
+    type: "list",
+    name: "next",
+    message: "Would you like to add another team member? Choose which role to add, or choose 'NONE' to exit:",
+    choices: [
+      "Engineer",
+      "Intern",
+      "Manager",
+      "NONE...I'm done creating my team, thank you!"
+    ]
+  }
+];
+
 //Questions for Manager:
-const managerQuestions = [
-    {
-        type: "input",
-        name: "name",
-        message: "What is the name of your team's manager?"
-    },
-    {
-        type: "input"
-    }
-]
+const managerData = [
+  {
+    type: "input",
+    name: "name",
+    message: "What is the name of your team's manager?"
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "What is your manager's employee ID number?"
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "What is your manager's email address?"
+  },
+  {
+    type: "input", 
+    name: "phone", 
+    message: "What is your manager's office phone number? (Use the format: xxx-xxx-xxxx):"
+  }
+];
+
+//Questions for Engineer:
+const engineerData = [
+  {
+    type: "input",
+    name: "name",
+    message: "What is this engineer's name?"
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "What is this engineer's employee ID number?"
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "What is this engineer's email address?"
+  },
+  {
+    type: "input", 
+    name: "github", 
+    message: "What is this engineer's GitHub username?"
+  }
+];
+
+//Questions for Intern: 
+const internData = [
+  {
+    type: "input",
+    name: "name",
+    message: "What is this intern's name?"
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "What is this intern's employee ID number?"
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "What is this intern's email address?"
+  },
+  {
+    type: "input", 
+    name: "github", 
+    message: "What is the name of the school this intern joined the team from?"
+  }
+];
+
+//Array to hold team members as they are added:
+const team = [];
+
+
+
+//Now build the functions to make it happen:
+
+// Init function to start with the manager prompts:
+function init() {
+  getManagerInfo();
+};
+
+function addMember() {
+  inquirer.prompt(nextMember).then((answers) => {
+    if (answers.next === "Engineer") {
+      console.log("Engineer")
+      getEngineerInfo();
+    } else if (answers.next === "Intern") {
+      console.log("Intern");
+      getInternInfo();
+    } else if (answers.next === "Manager") {
+      console.log("Manager");
+      getManagerInfo();
+    } else if (answers.next === "NONE...I'm done creating my team, thank you!") {
+      console.log(team);
+    };
+  });
+};
+
+function getManagerInfo() {
+  inquirer.prompt(managerData).then((answers) => {
+    const newManager = new Manager(answers.name, answers.id, answers.email, answers.phone);
+    team.push(newManager);
+    addMember();
+  }); 
+};
+
+function getEngineerInfo() {
+  inquirer.prompt(engineerData).then((answers) => {
+    const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+    team.push(newEngineer);
+    addMember();
+  }); 
+};
+
+function getInternInfo() {
+  inquirer.prompt(internData).then((answers) => {
+    const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
+    team.push(newIntern);
+    addMember();
+  }); 
+};
+
+
+
+// Function to return HTML
+function generateHTML() {
+  return html;
+};
+
+
+init();
 
