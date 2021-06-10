@@ -35,82 +35,52 @@ const html =`<!DOCTYPE html>
         <div class="row">
           <div class="team-cards col-12 d-flex flex-row flex-wrap justify-content-center">
 
-            <!-- Manager card -->
-            <div class="card w-25 bg-light m-3 shadow rounded">
-              <div class="card-header text-light">
-                <h2 class="name">Sonya</h2>
-                <h3 class="title"><i class="fas fa-mug-hot mr-1"></i>Manager</h3>
-              </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush border">
-                  <li class="list-group-item">ID: 42</li>
-                  <li class="list-group-item">Email: <a href="mailto:person@someplace.com">person@sompeplace.com</a></li>
-                  <li class="list-group-item">Office Phone: 231-867-5309</li>
-                </ul>
-              </div>
-            </div>    
-            
-        
-            <!-- Engineer Card -->
-            <div class="card w-25 bg-light m-3 shadow rounded">
-              <div class="card-header text-light">
-                <h2 class="name">Digger</h2>
-                <h3 class="title"><i class="fas fa-glasses mr-1"></i> Engineer</h3>
-              </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush border">
-                  <li class="list-group-item">ID: 37</li>
-                  <li class="list-group-item">Email: <a href="mailto:person@someplace.com">person@sompeplace.com</a></li>
-                  <li class="list-group-item">GitHub: <a href="https://github.com/username">gitUserName</a></li>
-                </ul>
-              </div>
-            </div>        
+          <!-- Manager card -->
+          <div class="card w-25 bg-light m-3 shadow rounded">
+            <div class="card-header text-light">
+              <h2 class="name">{manager.name}</h2>
+              <h3 class="title"><i class="fas fa-mug-hot mr-1"></i>{manager.role}</h3>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush border">
+                <li class="list-group-item">ID: {manager.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:{manager.email}">{manager.email}</a></li>
+                <li class="list-group-item">Office Phone: {manager.phone}</li>
+              </ul>
+            </div>
+          </div>    
+          
+      
+          <!-- Engineer Card -->
+          <div class="card w-25 bg-light m-3 shadow rounded">
+            <div class="card-header text-light">
+              <h2 class="name">{engineer.name}</h2>
+              <h3 class="title"><i class="fas fa-glasses mr-1"></i>{engineer.role}</h3>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush border">
+                <li class="list-group-item">ID: {engineer.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:{engineer.email}">{engineer.email}</a></li>
+                <li class="list-group-item">GitHub: <a href="https://github.com/{engineer.github}">{engineer.github}</a></li>
+              </ul>
+            </div>
+          </div>        
 
-            <!-- Engineer Card -->
-            <div class="card w-25 bg-light m-3 shadow rounded">
-              <div class="card-header text-light">
-                <h2 class="name">Maren</h2>
-                <h3 class="title"><i class="fas fa-glasses mr-1"></i> Engineer</h3>
-              </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush border">
-                  <li class="list-group-item">ID: 53</li>
-                  <li class="list-group-item">Email: <a href="mailto:person@someplace.com">person@sompeplace.com</a></li>
-                  <li class="list-group-item">GitHub: <a href="https://github.com/username">gitUserName</a></li>
-                </ul>
-              </div>
-            </div>        
+          <!-- Intern Card -->
+          <div class="card w-25 bg-light m-3 shadow rounded">
+            <div class="card-header text-light">
+              <h2 class="name">{intern.name}</h2>
+              <h3 class="title"><i class="fas fa-user-graduate mr-1"></i>{intern.role}</h3>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush border">
+                <li class="list-group-item">ID: {intern.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:{intern.email}">{intern.email}</a></li>
+                <li class="list-group-item">School: {intern.school}</li>
+              </ul>
+            </div>
+          </div> 
 
-            <!-- Engineer Card -->
-            <div class="card w-25 bg-light m-3 shadow rounded">
-              <div class="card-header text-light">
-                <h2 class="name">Talia</h2>
-                <h3 class="title"><i class="fas fa-glasses mr-1"></i> Engineer</h3>
-              </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush border">
-                  <li class="list-group-item">ID: 82</li>
-                  <li class="list-group-item">Email: <a href="mailto:person@someplace.com">person@sompeplace.com</a></li>
-                  <li class="list-group-item">GitHub: <a href="https://github.com/username">gitUserName</a></li>
-                </ul>
-              </div>
-            </div>        
-
-
-            <!-- Intern Card -->
-            <div class="card w-25 bg-light m-3 shadow rounded">
-              <div class="card-header text-light">
-                <h2 class="name">Joshua</h2>
-                <h3 class="title"><i class="fas fa-user-graduate mr-1"></i> Intern</h3>
-              </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush border">
-                  <li class="list-group-item">ID: 1</li>
-                  <li class="list-group-item">Email: <a href="mailto:person@someplace.com">person@sompeplace.com</a></li>
-                  <li class="list-group-item">School: Some University</li>
-                </ul>
-              </div>
-            </div>  
 
           </div>
         </div>
@@ -119,6 +89,8 @@ const html =`<!DOCTYPE html>
   </body>
 </html>`;
 
+// Empty array to add HTML team cards?
+const cardDeck = [];
 
 // Need questions for inquirer:
 
@@ -234,6 +206,7 @@ function addMember() {
       getManagerInfo();
     } else if (answers.next === "NONE...I'm done creating my team, thank you!") {
       console.log(team);
+      writeHTML();
     };
   });
 };
@@ -265,8 +238,10 @@ function getInternInfo() {
 
 
 // Function to return HTML
-function generateHTML() {
-  return html;
+function writeHTML(team) {
+  fs.writeFile('./dist/team.html', html, (err) => 
+    err ? console.log(err) : console.log('You have successfully created your "team.html" file!')
+    );
 };
 
 

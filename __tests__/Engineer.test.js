@@ -1,7 +1,7 @@
 const Engineer = require("../lib/Engineer");
 
 describe("Engineer class", () => {
-    it("Should create an object that extends engineer and adds github attribute", () => {
+    it("Should create an engineer object that extends employee and adds github attribute", () => {
         const engineer = new Engineer('Sue', 37, 'sue@sue.com', 'sueGitHub');
 
         expect(engineer.name).toEqual('Sue');
