@@ -11,47 +11,9 @@ let fullTeam = [];
 
 
 // Team cards template, to add cards with new data for the mainHTML
-let cardDeck = ` `;
+let cardDeck = `<!-- New cards added here-->
 
-// Template Literal for HTML
-let mainHTML =`<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Team Profile</title>
-    <!-- Latest compiled and minified CSS & JS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">    
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./style.css" />
-
-  </head>
-
-  <body>
-
-      <!-- Jumbotron with TEAM header. -->
-    <div class="jumbotron jumbotron-fluid" id="jumbo">
-        <div class="container">
-          <h1 class="display-4 text-center text-light">My Amazing Team</h1>
-        </div>
-      </div>
-
-     <!-- Card Deck for team members -->
-      <div class="container">
-        <div class="row">
-          <div class="team-cards col-12 d-flex flex-row flex-wrap justify-content-center">
- 
-    <!-- New cards added here-->
-          ${cardDeck}
-
-          </div>
-        </div>
-      </div>
-
-  </body>
-</html>`;
-
+`;
 
 
 // Need questions for inquirer:
@@ -164,7 +126,6 @@ function addMember() {
       console.log("Manager");
       getManagerInfo();
     } else if (answers.next === "NONE...I'm done creating my team, thank you!") {
-      console.log(cardDeck);
       writeHTML();
     };
   });
@@ -173,7 +134,7 @@ function addMember() {
 function getManagerInfo() {
   inquirer.prompt(managerData).then((answers) => {
     let newManager = new Manager(answers.name, answers.id, answers.email, answers.phone);
-    let managerHTML = `           <!-- Manager card -->
+    let managerHTML = `
           <div class="card w-25 bg-light m-3 shadow rounded">
             <div class="card-header text-light">
               <h2 class="name">${newManager.name}</h2>
@@ -189,6 +150,7 @@ function getManagerInfo() {
           </div>            
 `;
     fullTeam.push(newManager);
+    cardDeck += managerHTML;
     addMember();
   }); 
 };
@@ -196,7 +158,7 @@ function getManagerInfo() {
 function getEngineerInfo() {
   inquirer.prompt(engineerData).then((answers) => {
     let newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-    let engineerHTML = `          <!-- Engineer Card -->
+    let engineerHTML = `
           <div class="card w-25 bg-light m-3 shadow rounded">
             <div class="card-header text-light">
               <h2 class="name">$${newEngineer.name}</h2>
@@ -204,15 +166,16 @@ function getEngineerInfo() {
             </div>
             <div class="card-body">
               <ul class="list-group list-group-flush border">
-                <li class="list-group-item">ID: $${newEngineer.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:$${newEngineer.email}">$${newEngineer.email}</a></li>
-                <li class="list-group-item">GitHub: <a href="https://github.com/${newEngineer.github}">$${newEngineer.github}</a></li>
+                <li class="list-group-item">ID: ${newEngineer.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${newEngineer.email}">$${newEngineer.email}</a></li>
+                <li class="list-group-item">GitHub: <a href="https://github.com/${newEngineer.github}">${newEngineer.github}</a></li>
               </ul>
             </div>
           </div>        
 `;
 
     fullTeam.push(newEngineer);
+    cardDeck += engineerHTML;
     addMember();
   }); 
 };
@@ -220,7 +183,7 @@ function getEngineerInfo() {
 function getInternInfo() {
   inquirer.prompt(internData).then((answers) => {
     const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
-    let internHTML = `          <!-- Intern Card -->
+    let internHTML = `
           <div class="card w-25 bg-light m-3 shadow rounded">
             <div class="card-header text-light">
               <h2 class="name">${newIntern.name}</h2>
@@ -236,17 +199,56 @@ function getInternInfo() {
           </div> 
 `;
 
-    fullTeam.push(internHTML);
+    fullTeam.push(newIntern);
+    cardDeck += internHTML;
     addMember();
   }); 
 };
 
 
-
 // Function to return HTML
 function writeHTML() {
+  // Template Literal for HTML
+  let mainHTML =`<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Team Profile</title>
+      <!-- Latest compiled and minified CSS & JS -->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">    
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="./style.css" />
+
+    </head>
+
+    <body>
+
+        <!-- Jumbotron with TEAM header. -->
+      <div class="jumbotron jumbotron-fluid" id="jumbo">
+          <div class="container">
+            <h1 class="display-4 text-center text-light">My Amazing Team</h1>
+          </div>
+        </div>
+
+      <!-- Card Deck for team members -->
+        <div class="container">
+          <div class="row">
+            <div class="team-cards col-12 d-flex flex-row flex-wrap justify-content-center">
+  
+            ${cardDeck}
+
+            </div>
+          </div>
+        </div>
+
+    </body>
+  </html>`;
+
+// Write the file to the 'dist' foler in the repository.
   fs.writeFile('./dist/team.html', mainHTML, (err) => 
-    err ? console.log(err) : console.log('You have successfully created your "team.html" file!')
+    err ? console.log(err) : console.log('You have successfully created your Amazing Team "team.html" file!')
     );
 };
 
