@@ -6,8 +6,15 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
+//Array to hold team members as they are added:
+let fullTeam = [];
+
+
+// Team cards template, to add cards with new data for the mainHTML
+let cardDeck = ` `;
+
 // Template Literal for HTML
-const mainHTML =`<!DOCTYPE html>
+let mainHTML =`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,6 +37,12 @@ const mainHTML =`<!DOCTYPE html>
         </div>
       </div>
 
+     <!-- Card Deck for team members -->
+      <div class="container">
+        <div class="row">
+          <div class="team-cards col-12 d-flex flex-row flex-wrap justify-content-center">
+ 
+    <!-- New cards added here-->
           ${cardDeck}
 
           </div>
@@ -38,72 +51,6 @@ const mainHTML =`<!DOCTYPE html>
 
   </body>
 </html>`;
-
-
-// Templates for each team member role: 
-
-const managerHTML = `           <!-- Manager card -->
-          <div class="card w-25 bg-light m-3 shadow rounded">
-            <div class="card-header text-light">
-              <h2 class="name">${manager.name}</h2>
-              <h3 class="title"><i class="fas fa-mug-hot mr-1"></i>${manager.role}</h3>
-            </div>
-            <div class="card-body">
-              <ul class="list-group list-group-flush border">
-                <li class="list-group-item">ID: ${manager.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
-                <li class="list-group-item">Office Phone: ${manager.phone}</li>
-              </ul>
-            </div>
-          </div>    
-          
-`;
-
-const engineerHTML = `          <!-- Engineer Card -->
-          <div class="card w-25 bg-light m-3 shadow rounded">
-            <div class="card-header text-light">
-              <h2 class="name">${engineer.name}</h2>
-              <h3 class="title"><i class="fas fa-glasses mr-1"></i>${engineer.role}</h3>
-            </div>
-            <div class="card-body">
-              <ul class="list-group list-group-flush border">
-                <li class="list-group-item">ID: ${engineer.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
-                <li class="list-group-item">GitHub: <a href="https://github.com/{engineer.github}">${engineer.github}</a></li>
-              </ul>
-            </div>
-          </div>        
-
-`;
-
-const internHTML = `          <!-- Intern Card -->
-          <div class="card w-25 bg-light m-3 shadow rounded">
-            <div class="card-header text-light">
-              <h2 class="name">${intern.name}</h2>
-              <h3 class="title"><i class="fas fa-user-graduate mr-1"></i>${intern.role}</h3>
-            </div>
-            <div class="card-body">
-              <ul class="list-group list-group-flush border">
-                <li class="list-group-item">ID: ${intern.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
-                <li class="list-group-item">School: ${intern.school}</li>
-              </ul>
-            </div>
-          </div> 
-
-`;
-
-
-
-// Team cards template, to add cards with new data for the mainHTML
-const cardDeck = `      <!-- Card Deck for team members -->
-      <div class="container">
-        <div class="row">
-          <div class="team-cards col-12 d-flex flex-row flex-wrap justify-content-center">
- 
-    <!-- New cards added here-->
-
-`;
 
 
 
@@ -191,13 +138,10 @@ const internData = [
   },
   {
     type: "input", 
-    name: "github", 
+    name: "school", 
     message: "What is the name of the school this intern joined the team from?"
   }
 ];
-
-//Array to hold team members as they are added:
-const team = [];
 
 
 
@@ -220,7 +164,7 @@ function addMember() {
       console.log("Manager");
       getManagerInfo();
     } else if (answers.next === "NONE...I'm done creating my team, thank you!") {
-      console.log(team);
+      console.log(cardDeck);
       writeHTML();
     };
   });
@@ -228,16 +172,47 @@ function addMember() {
 
 function getManagerInfo() {
   inquirer.prompt(managerData).then((answers) => {
-    const newManager = new Manager(answers.name, answers.id, answers.email, answers.phone);
-    team.push(newManager);
+    let newManager = new Manager(answers.name, answers.id, answers.email, answers.phone);
+    let managerHTML = `           <!-- Manager card -->
+          <div class="card w-25 bg-light m-3 shadow rounded">
+            <div class="card-header text-light">
+              <h2 class="name">${newManager.name}</h2>
+              <h3 class="title"><i class="fas fa-mug-hot mr-1"></i>${newManager.role}</h3>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush border">
+                <li class="list-group-item">ID: ${newManager.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${newManager.email}">${newManager.email}</a></li>
+                <li class="list-group-item">Office Phone: ${newManager.phone}</li>
+              </ul>
+            </div>
+          </div>            
+`;
+    fullTeam.push(newManager);
     addMember();
   }); 
 };
 
 function getEngineerInfo() {
   inquirer.prompt(engineerData).then((answers) => {
-    const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-    team.push(newEngineer);
+    let newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+    let engineerHTML = `          <!-- Engineer Card -->
+          <div class="card w-25 bg-light m-3 shadow rounded">
+            <div class="card-header text-light">
+              <h2 class="name">$${newEngineer.name}</h2>
+              <h3 class="title"><i class="fas fa-glasses mr-1"></i>${newEngineer.role}</h3>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush border">
+                <li class="list-group-item">ID: $${newEngineer.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:$${newEngineer.email}">$${newEngineer.email}</a></li>
+                <li class="list-group-item">GitHub: <a href="https://github.com/${newEngineer.github}">$${newEngineer.github}</a></li>
+              </ul>
+            </div>
+          </div>        
+`;
+
+    fullTeam.push(newEngineer);
     addMember();
   }); 
 };
@@ -245,7 +220,23 @@ function getEngineerInfo() {
 function getInternInfo() {
   inquirer.prompt(internData).then((answers) => {
     const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
-    team.push(newIntern);
+    let internHTML = `          <!-- Intern Card -->
+          <div class="card w-25 bg-light m-3 shadow rounded">
+            <div class="card-header text-light">
+              <h2 class="name">${newIntern.name}</h2>
+              <h3 class="title"><i class="fas fa-user-graduate mr-1"></i>${newIntern.role}</h3>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush border">
+                <li class="list-group-item">ID: ${newIntern.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${newIntern.email}">${newIntern.email}</a></li>
+                <li class="list-group-item">School: ${newIntern.school}</li>
+              </ul>
+            </div>
+          </div> 
+`;
+
+    fullTeam.push(internHTML);
     addMember();
   }); 
 };
@@ -254,7 +245,7 @@ function getInternInfo() {
 
 // Function to return HTML
 function writeHTML() {
-  fs.writeFile('./dist/team.html', html, (err) => 
+  fs.writeFile('./dist/team.html', mainHTML, (err) => 
     err ? console.log(err) : console.log('You have successfully created your "team.html" file!')
     );
 };
