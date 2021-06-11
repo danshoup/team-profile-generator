@@ -12,7 +12,6 @@ let fullTeam = [];
 
 // Team cards template, to add cards with new data for the mainHTML
 let cardDeck = `<!-- New cards added here-->
-
 `;
 
 
@@ -144,7 +143,7 @@ function getManagerInfo() {
               <ul class="list-group list-group-flush border">
                 <li class="list-group-item">ID: ${newManager.id}</li>
                 <li class="list-group-item">Email: <a href="mailto:${newManager.email}">${newManager.email}</a></li>
-                <li class="list-group-item">Office Phone: ${newManager.phone}</li>
+                <li class="list-group-item">Phone: ${newManager.phone}</li>
               </ul>
             </div>
           </div>            
@@ -161,13 +160,13 @@ function getEngineerInfo() {
     let engineerHTML = `
           <div class="card w-25 bg-light m-3 shadow rounded">
             <div class="card-header text-light">
-              <h2 class="name">$${newEngineer.name}</h2>
+              <h2 class="name">${newEngineer.name}</h2>
               <h3 class="title"><i class="fas fa-glasses mr-1"></i>${newEngineer.role}</h3>
             </div>
             <div class="card-body">
               <ul class="list-group list-group-flush border">
                 <li class="list-group-item">ID: ${newEngineer.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${newEngineer.email}">$${newEngineer.email}</a></li>
+                <li class="list-group-item">Email: <a href="mailto:${newEngineer.email}">${newEngineer.email}</a></li>
                 <li class="list-group-item">GitHub: <a href="https://github.com/${newEngineer.github}">${newEngineer.github}</a></li>
               </ul>
             </div>

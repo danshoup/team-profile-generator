@@ -8,7 +8,8 @@ Tests for each module will also be created to ensure the code is functioning as 
 
 ### Live Links
 - [Daniel Shoup's Team Profile Generator Repisitory](https://github.com/danshoup/team-profile-generator)
-- [Daniel Shoup's Team Profile Generator Demo Video](https://drive.google.com/file/????/view)
+- [Daniel Shoup's Team Profile Generator Demo Video](https://drive.google.com/file/d/1mDbIgMFZG7CoDk4Q9W_7h0CXW2roblzk/view)
+- [Daniel Shoup's link to the sample HTML file:](https://github.com/danshoup/team-profile-generator/blob/main/dist/team.html)
 
 
 ### Team Profile Generator Screenshot
